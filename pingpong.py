@@ -1,8 +1,5 @@
-
-
 from pygame import *
 from random import randint
-from time import time as timer
 
 
 
@@ -48,9 +45,9 @@ finish = False
 clock = time.Clock()
 FPS = 60    
 
-racket1 = Player('racket.png', 30, 200, 4, 50, 150)
-racket2 = Player('racket.png', 520, 200, 4, 50, 50)  
-ball = GameSprite('tenis_ball.png', 200, 4, 50, 50) 
+racket1 = Player('racket.jpg', 30, 200, 50, 150,4)
+racket2 = Player('racket.jpg', 520, 200, 50, 150, 4)  
+ball = GameSprite('ball.png', 200, 200, 50, 50, 4) 
 
 
 font.init()
@@ -77,25 +74,29 @@ while game:
         racket2.update_r()
         ball.rect.x += speed_x
         ball.rect.y += speed_y
+        racket1.reset()
+        racket2.reset()
+        ball.reset()
 
 
 
         if sprite.collide_rect(racket1, ball) or sprite.collide_rect(racket2, ball):
             speed_x *= -1
-            speed_y *= 1
+            #
 
-        if    
-        
+        if ball.rect.y <= 0 or ball.rect.bottom >= 500:
+            speed_y *= -1
 
-                
-                
-                if num_fire <= 5 and rel_time == False:
-                    fire.play()
-                    ship.fire()
+        if ball.rect.x <-50:
+            window.blit(lose1, (150, 250)) 
+            finish = True
 
-                if num_fire >= 5 and rel_time == False:
-                    last_time = timer()
-                    rel_time = True
+        if ball.rect.x > 600:
+            window.blit(lose2, (150, 250))
+            finish = True
+        display.update()
+        clock.tick(FPS)
+'''
 
     if not finish:
         window.blit(background,(0,0))
@@ -105,28 +106,5 @@ while game:
         text_lose = font1.render("Пропущено: " + str(lost), 1, (255, 255, 255))
         window.blit(text_lose, (10, 50))
 
-
-
-        if rel_time == True:
-            now_time = timer()
-        if now_time - last_time < 3:
-                reload = font2.render('Wait, reload...', 1, (150, 0, 0))
-                window.blit(reload, (260, 460))
-        else:
-            num_fire = 0
-            rel_time = False        
-for c in collides:
-
-    score = score + 1
-    
-
-
-    life = life -1
-if life == 0 or lost >= max_lost:
-    finish = True
-    window.blit(lose, (200, 200))
-
-
-    display.update()
-    clock.tick(FPS)
+'''
 
